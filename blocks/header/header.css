@@ -4,3 +4,9 @@
     align-items: flex-start;
     flex-direction: column;
 }
+
+@media screen and(min-width: 1280px) {
+    .header {
+        padding-top: 45px;
+    }
+}

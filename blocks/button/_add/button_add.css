@@ -6,4 +6,11 @@
     background-size: 16px;
     background-repeat: no-repeat;
     background-position: 50%;
+    max-width: 150px;
+}
+
+@media screen and (min-width: 1280px) {
+    .button_add {
+        justify-self: flex-end;
+    }
 }

@@ -8,3 +8,9 @@
     background-repeat: no-repeat;
     background-position: 50%;
 }
+
+@media screen and (min-width: 1280px) {
+    .button_edit {
+        margin-left: 25px;
+    }
+}
