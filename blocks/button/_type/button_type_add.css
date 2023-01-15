@@ -1,4 +1,4 @@
-.button_add {
+.button_type_add {
     width: 100%;
     min-height: 50px;
     border: 2px solid white;
@@ -11,14 +11,14 @@
 }
 
 @media screen and (min-width: 768px) {
-    .button_add {
+    .button_type_add {
         justify-self: flex-end;
         max-width: 150px;
     }
 }
 
 @media screen and (min-width: 1280px) {
-    .button_add {
+    .button_type_add {
         justify-self: flex-end;
     }
 }

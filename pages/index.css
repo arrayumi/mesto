@@ -6,12 +6,12 @@
 @import url(../blocks/page/__element/page__element.css);
 
 @import url(../blocks/button/button.css);
-@import url(../blocks/button/_add/button_add.css);
-@import url(../blocks/button/_edit/button_edit.css);
-@import url(../blocks/button/_like/button_like.css);
-@import url(../blocks/button/_like/_active/button_like_active.css);
-@import url(../blocks/button/_close/button_close.css);
-@import url(../blocks/button/_save/button_save.css);
+@import url(../blocks/button/_type/button_type_add.css);
+@import url(../blocks/button/_type/button_type_edit.css);
+@import url(../blocks/button/_type/button_type_like.css);
+@import url(../blocks/button/_type/button_type_close.css);
+@import url(../blocks/button/_type/button_type_save.css);
+@import url(../blocks/button/_active/button_active.css);
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);

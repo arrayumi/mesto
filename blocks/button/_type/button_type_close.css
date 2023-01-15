@@ -1,4 +1,4 @@
-.button_close {
+.button_type_close {
     position: absolute;
     top: -36px;
     right: 0;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .button_close {
+    .button_type_close {
         top: -40px;
         right: -40px;
         width: 32px;
