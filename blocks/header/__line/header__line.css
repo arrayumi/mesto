@@ -1,7 +1,7 @@
 .header__line {
     padding-top: 32px;
     width: 100%;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #545454;
     opacity: .7;
     align-self: center;
 }
