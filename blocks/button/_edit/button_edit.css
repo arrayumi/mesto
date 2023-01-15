@@ -9,7 +9,7 @@
     background-position: 50%;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
     .button_edit {
         margin-left: 25px;
     }
