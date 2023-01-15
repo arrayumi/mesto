@@ -3,7 +3,6 @@
     width: 100%;
     border-bottom: 1px solid #545454;
     opacity: .7;
-    align-self: center;
 }
 
 @media screen and (min-width: 1280px) {
