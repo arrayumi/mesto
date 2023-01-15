@@ -1,7 +1,7 @@
 .header__line {
     padding-top: 32px;
     width: 100%;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid white;
     opacity: .7;
     align-self: center;
 }
@@ -9,6 +9,5 @@
 @media screen and (min-width: 1280px) {
     .header__line {
         padding-top: 41px;
-        width: calc(100% - 400px);
     }
 }
