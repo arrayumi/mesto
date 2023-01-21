@@ -1,9 +1,0 @@
-.popup__title_type_edit-profile {
-    padding-bottom: 75px;
-}
-
-@media screen and (min-width: 768px) {
-    .popup__title_type_edit-profile {
-        padding-bottom: 54px;
-    }
-}
