@@ -1,8 +1,9 @@
 .header {
-    padding-top: 28px;
+    padding: 28px 0 32px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    border-bottom: 1px solid rgba(84,84,84,.7);
 }
 
 @media screen and (max-width: 768px) {
@@ -14,5 +15,11 @@
 @media screen and (min-width: 768px) {
     .header {
         padding-top: 45px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .header {
+        padding-bottom: 41px;
     }
 }
