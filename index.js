@@ -10,21 +10,19 @@ let popupAbout = document.querySelector('.popup__input_type_about');
 
 function editInfo() {
     popup.classList.add('popup_opened');
-    popupName.setAttribute('value', profileName.textContent);
-    popupAbout.setAttribute('value', profileAbout.textContent);
+    popupName.value = profileName.textContent;
+    popupAbout.value = profileAbout.textContent;
 }
 
 function closePopup() {
     popup.classList.remove('popup_opened');
-    popupName.value = profileName.textContent;
-    popupAbout.value = profileAbout.textContent;
 }
 
 function saveInfo(evt) {
     evt.preventDefault();
     profileName.textContent = popupName.value;
     profileAbout.textContent = popupAbout.value;
-    popup.classList.remove('popup_opened');
+    closePopup();
 }
 
 editButton.addEventListener('click', editInfo);
