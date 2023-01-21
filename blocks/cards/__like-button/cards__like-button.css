@@ -1,4 +1,7 @@
-.button_type_like {
+.cards__like-button {
+    background-color: transparent;
+    opacity: 1;
+    transition: opacity 1s ease;
     border: none;
     width: 25px;
     height: 19px;
@@ -8,6 +11,6 @@
     background-position: 50%;
 }
 
-.button_type_like:hover {
+.cards__like-button:hover {
     opacity: .5;
 }

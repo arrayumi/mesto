@@ -1,9 +1,5 @@
-.button {
+.popup__button {
     background-color: transparent;
     opacity: 1;
     transition: opacity 1s ease;
-}
-
-.button:hover {
-    opacity: .6;
 }
