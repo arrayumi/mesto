@@ -30,9 +30,8 @@
             <ul class="cards__list">
 
                 <template id="cards-item">
-                    <div class="temp-container">
                         <li class="cards__item">
-                            <article>
+                            <article class="cards__article">
                                 <img class="cards__image" src="" alt="">
                                 <div class="cards__item-description">
                                     <h2 class="cards__title"></h2>
@@ -98,7 +97,7 @@
     <div class="popup popup_type_edit-profile">
         <div class="popup__container">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="popup-form">
+            <form class="popup__form" name="edit-profile-form">
                 <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name-input">
                 <input class="popup__input popup__input_type_about" type="text" placeholder="О себе" name="job-input">
                 <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
@@ -110,7 +109,7 @@
     <div class="popup popup_type_add-card">
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="popup-form">
+            <form class="popup__form" name="save-card-form">
                 <input class="popup__input popup__input_type_name" type="text" placeholder="Название"
                     name="card-name-input">
                 <input class="popup__input popup__input_type_about" type="text" placeholder="Ссылка на картинку"
