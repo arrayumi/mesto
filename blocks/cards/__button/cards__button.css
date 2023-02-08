@@ -1,0 +1,13 @@
+.cards__button {
+    background-color: transparent;
+    opacity: 1;
+    transition: opacity 1s ease;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    cursor: pointer;
+}
+
+.cards__button:hover {
+    opacity: .5;
+}
