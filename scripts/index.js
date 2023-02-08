@@ -47,6 +47,10 @@ const popupCardImage = document.querySelector('input[name="card-url-input"]');
 
 const cardsItemTemplate = document.querySelector('#cards-item').content;
 
+const popupImage = document.querySelector('.popup_type_image');
+const imageOpened = document.querySelector('.popup__image');
+const imageCaption = document.querySelector('.popup__image-caption');
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -93,8 +97,6 @@ function createCard(title, image) {
   const cardTitle = cardsItem.querySelector('.cards__title');
   cardTitle.textContent = title;
 
-  cardsList.prepend(cardsItem);
-
   const likeButton = cardsItem.querySelector('.cards__like-button');
   likeButton.addEventListener('click', (evt) => {
     evt.target.classList.toggle('cards__like-button_active')
@@ -106,14 +108,13 @@ function createCard(title, image) {
   })
 
   cardImage.addEventListener('click', function () {
-    const popupImage = document.querySelector('.popup_type_image');
-    const imageOpened = document.querySelector('.popup__image');
     imageOpened.src = image;
     imageOpened.alt = title;
-    const imageCaption = document.querySelector('.popup__image-caption');
     imageCaption.textContent = title;
     openPopup(popupImage);
   })
+
+  cardsList.prepend(cardsItem);
 }
 
 function displayInitialCards() {
@@ -130,7 +131,7 @@ editForm.addEventListener('submit', saveInfo);
 addButton.addEventListener('click', function () { openPopup(popupAddCard) });
 saveCardForm.addEventListener('submit', saveCard);
 
-const closeButtons = Array.from(document.querySelectorAll('.popup__button_type_close'));
-closeButtons.forEach(element => {
-  element.addEventListener('click', function () { closePopup(element.closest('.popup')) });
+const closeButtons = document.querySelectorAll('.popup__button_type_close');
+closeButtons.forEach(button => {
+  button.addEventListener('click', () => closePopup(button.closest('.popup')));
 });
