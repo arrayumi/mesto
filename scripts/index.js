@@ -87,8 +87,7 @@ function deleteCard(button) {
   button.closest('.cards__item').remove();
 }
 
-
-function createCard(title, image) {
+function getCard(title, image) {
   const cardsItem = cardsItemTemplate.querySelector('.cards__item').cloneNode(true);
   const cardImage = cardsItem.querySelector('.cards__image');
   cardImage.src = image;
@@ -113,7 +112,11 @@ function createCard(title, image) {
     openPopup(popupImage);
   })
 
-  cardsList.prepend(cardsItem);
+  return cardsItem;
+}
+
+function createCard(title, image) {
+  cardsList.prepend(getCard(title, image));
 }
 
 function displayInitialCards() {
