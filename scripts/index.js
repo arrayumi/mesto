@@ -42,7 +42,13 @@ function createCard(title, image) {
 
   const likeButton = cardsItem.querySelector('.cards__like-button');
   likeButton.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('cards__like-button_active')});
+    evt.target.classList.toggle('cards__like-button_active')
+  });
+
+  const deleteButton = cardsItem.querySelector('.cards__delete-button');
+  deleteButton.addEventListener('click', function () {
+    deleteCard(deleteButton);
+  })
 }
 
 
@@ -52,6 +58,11 @@ function displayInitialCards() {
     createCard(element.title, element.link);
   });
 }
+
+function deleteCard(button) {
+  button.closest('.cards__item').remove();
+}
+
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -102,8 +113,12 @@ function saveCard(evt) {
   closePopup(popupAddCard);
 }
 
-function like(likeBtn) {
-  likeBtn.classList.toggle('cards__like-button_active');
+function like(button) {
+  button.classList.toggle('cards__like-button_active');
+}
+
+function deleteCard(button) {
+  button.closest('.cards__item').remove();
 }
 
 // взаимодействие с пользователем
@@ -113,10 +128,10 @@ displayInitialCards();
 editButton.addEventListener('click', editProfile);
 editForm.addEventListener('submit', saveInfo);
 
-addButton.addEventListener('click', function () {openPopup(popupAddCard)});
+addButton.addEventListener('click', function () { openPopup(popupAddCard) });
 saveCardForm.addEventListener('submit', saveCard);
 
 const closeButtons = Array.from(document.querySelectorAll('.popup__button_type_close'));
 closeButtons.forEach(element => {
-  element.addEventListener('click', function () {closePopup(element.parentElement.parentElement)});
+  element.addEventListener('click', function () { closePopup(element.parentElement.parentElement) });
 });
