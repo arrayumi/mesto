@@ -31,8 +31,8 @@ const popupAddCard = document.querySelector('.popup_type_add-card');
 const editButton = document.querySelector('.profile__button_type_edit');
 const addButton = document.querySelector('.profile__button_type_add');
 
-const editForm = document.querySelector('form[name="edit-profile-form"]');
-const saveCardForm = document.querySelector('form[name="save-card-form"]');
+const editForm = document.forms["edit-profile-form"];
+const saveCardForm = document.forms["save-card-form"];
 
 const cardsList = document.querySelector('.cards__list');
 
