@@ -75,8 +75,7 @@ function handleProfileFormSubmit(evt) {
 function saveCard(evt) {
   evt.preventDefault();
   createCard(popupCardTitle.value, popupCardImage.value);
-  popupCardTitle.value = '';
-  popupCardImage.value = '';
+  evt.target.reset();
   closePopup(popupAddCard);
 }
 
