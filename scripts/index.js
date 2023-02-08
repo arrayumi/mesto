@@ -36,7 +36,7 @@ function createCard(title, image) {
   cardImage.src = image;
   cardImage.alt = title;
   const cardTitle = cardsItem.querySelector('.cards__title');
-  cardTitle.textContent += title;
+  cardTitle.textContent = title;
 
   cardsList.prepend(cardsItem);
 
@@ -49,7 +49,18 @@ function createCard(title, image) {
   deleteButton.addEventListener('click', function () {
     deleteCard(deleteButton);
   })
+
+  cardImage.addEventListener('click', function () {
+    const imageOpened = document.querySelector('.popup__image');
+    imageOpened.src = image;
+    imageOpened.alt = title;
+    imageOpened.onerror
+    const imageCaption = document.querySelector('.popup__image-caption');
+    imageCaption.textContent = title;
+    openPopup(popupImage);
+  })
 }
+
 
 
 // функция отображения массива карточек при загрузке
@@ -63,7 +74,7 @@ function deleteCard(button) {
   button.closest('.cards__item').remove();
 }
 
-
+const popupImage = document.querySelector('.popup_type_image')
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 

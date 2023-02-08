@@ -30,16 +30,16 @@
             <ul class="cards__list">
 
                 <template id="cards-item">
-                        <li class="cards__item">
-                            <article class="cards__article">
-                                <img class="cards__image" src="" alt="">
-                                <div class="cards__item-description">
-                                    <h2 class="cards__title"></h2>
-                                    <button class="cards__like-button" type="button"></button>
-                                </div>
-                                <button class="cards__delete-button" type="button"></button>
-                            </article>
-                        </li>
+                    <li class="cards__item">
+                        <article class="cards__article">
+                            <img class="cards__image" src="#" alt="#">
+                            <div class="cards__item-description">
+                                <h2 class="cards__title"></h2>
+                                <button class="cards__like-button" type="button"></button>
+                            </div>
+                            <button class="cards__delete-button" type="button"></button>
+                        </article>
+                    </li>
                 </template>
         </section>
     </main>
@@ -70,6 +70,14 @@
                     name="card-url-input">
                 <button class="popup__button popup__button_type_save" type="submit">Создать</button>
             </form>
+            <button class="popup__button popup__button_type_close" type="button"></button>
+        </div>
+    </div>
+
+    <div class="popup popup_type_image">
+        <div class="popup__image-container">
+            <img class="popup__image" src="#" alt="#">
+            <p class="popup__image-caption"></p>
             <button class="popup__button popup__button_type_close" type="button"></button>
         </div>
     </div>
