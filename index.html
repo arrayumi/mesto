@@ -52,9 +52,17 @@
     <div class="popup popup_type_edit-profile">
         <div class="popup__container">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="edit-profile-form">
-                <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name-input">
-                <input class="popup__input popup__input_type_about" type="text" placeholder="О себе" name="job-input">
+            <form class="popup__form" name="edit-profile-form" novalidate>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name-input"
+                        novalidate>
+                    <span class="popup__input-error popup__input-error_active">Вы пропустили это поле.</span>
+                </label>
+                <label class="popup__field">
+                <input class="popup__input popup__input_type_about" type="text" placeholder="О себе" name="job-input"
+                    novalidate>
+                    <span class="popup__input-error popup__input-error_active">Вы пропустили это поле.</span>
+                </label>
                 <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
             </form>
             <button class="popup__button popup__button_type_close" type="button"></button>
@@ -64,11 +72,17 @@
     <div class="popup popup_type_add-card">
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="save-card-form">
-                <input class="popup__input popup__input_type_name" type="text" placeholder="Название"
-                    name="card-name-input">
-                <input class="popup__input popup__input_type_about" type="text" placeholder="Ссылка на картинку"
-                    name="card-url-input">
+            <form class="popup__form" name="save-card-form" required>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_name" type="text" placeholder="Название"
+                        name="card-name-input" novalidate>
+                    <span class="popup__input-error popup__input-error_active">Вы пропустили это поле.</span>
+                </label>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_type_about" type="text" placeholder="Ссылка на картинку"
+                        name="card-url-input" novalidate>
+                    <span class="popup__input-error popup__input-error_active">Введите адрес сайта.</span>
+                </label>
                 <button class="popup__button popup__button_type_save" type="submit">Создать</button>
             </form>
             <button class="popup__button popup__button_type_close" type="button"></button>
@@ -83,6 +97,7 @@
         </div>
     </div>
 
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 
