@@ -51,6 +51,8 @@ const popupImage = document.querySelector('.popup_type_image');
 const imageOpened = document.querySelector('.popup__image');
 const imageCaption = document.querySelector('.popup__image-caption');
 
+// открытие-закрытие попапов
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -58,6 +60,8 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
+
+// логика формы редактирования профиля
 
 function clearErrorFields(form) {
   const inputList = Array.from(form.querySelectorAll('.popup__input'));
@@ -137,6 +141,9 @@ function displayInitialCards() {
     createCard(element.title, element.link);
   });
 }
+// закончили работать с карточками
+
+// отображаем массив стартовых карточек и обвешиваем кнопки обработчиками
 
 displayInitialCards();
 

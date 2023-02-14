@@ -5,31 +5,13 @@ const formValidationConfig = {
     buttonSelector: '.popup__button',
 }
 
+// отключаем поведение по умолчанию
+
 function disableSubmit(evt) {
     evt.preventDefault();
 }
 
-function enableValidation(config) {
-    const formList = Array.from(document.querySelectorAll(config.formSelector));
-    formList.forEach((form) => {
-        toggleButton(form, config);
-        form.addEventListener('submit', disableSubmit);
-        form.addEventListener('input', () => {
-            toggleButton(form, config);
-        })
-
-        addInputListeners(form, config);
-    })
-}
-
-function addInputListeners(form, config) {
-    const inputList = Array.from(form.querySelectorAll(config.inputSelector));
-    inputList.forEach((input) => {
-        input.addEventListener('input', (evt) => {
-            handleFormInput(evt, config);
-        })
-    })
-}
+// отображение сообщений об ошибках в инпутах
 
 function handleFormInput(evt, config) {
     const input = evt.target;
@@ -45,6 +27,16 @@ function handleFormInput(evt, config) {
     }
 }
 
+function addInputListeners(form, config) {
+    const inputList = Array.from(form.querySelectorAll(config.inputSelector));
+    inputList.forEach((input) => {
+        input.addEventListener('input', (evt) => {
+            handleFormInput(evt, config);
+        })
+    })
+}
+
+// отображаем кнопку в зависимости от валидности формы
 
 function toggleButton(form, config) {
     const button = form.querySelector(config.buttonSelector);
@@ -54,4 +46,19 @@ function toggleButton(form, config) {
     else {
         button.disabled = false;
     }
+}
+
+// включение валидации форм
+
+function enableValidation(config) {
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
+    formList.forEach((form) => {
+        toggleButton(form, config);
+        form.addEventListener('submit', disableSubmit);
+        form.addEventListener('input', () => {
+            toggleButton(form, config);
+        })
+
+        addInputListeners(form, config);
+    })
 }
