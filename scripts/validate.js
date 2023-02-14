@@ -50,15 +50,18 @@ function toggleButton(form, config) {
 
 // включение валидации форм
 
+function enableFormValidation(form, config) {
+    toggleButton(form, config);
+    form.addEventListener('submit', disableSubmit);
+    form.addEventListener('input', () => {
+        toggleButton(form, config);
+    })
+    addInputListeners(form, config);
+}
+
 function enableValidation(config) {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((form) => {
-        toggleButton(form, config);
-        form.addEventListener('submit', disableSubmit);
-        form.addEventListener('input', () => {
-            toggleButton(form, config);
-        })
-
-        addInputListeners(form, config);
+        enableFormValidation(form, config);
     })
 }
