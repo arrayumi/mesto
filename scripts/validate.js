@@ -6,17 +6,26 @@ function disableSubmit(evt) {
 
 // отображение сообщений об ошибках в инпутах
 
+function hideInputErrors(input, inputError, config) {
+    input.classList.remove(config.errorClass);
+    inputError.textContent = "";
+}
+
+function showInputErrors (input, inputError, config) {
+    input.classList.add(config.errorClass);
+    inputError.textContent = input.validationMessage;
+}
+
+
 function handleFormInput(evt, config) {
     const input = evt.target;
     const inputId = input.id;
     const inputError = document.querySelector(`#${inputId}-error`);
     if (input.validity.valid) {
-        input.classList.remove(config.errorClass);
-        inputError.textContent = "";
+        hideInputErrors(input, inputError, config);
     }
     else {
-        input.classList.add(config.errorClass);
-        inputError.textContent = input.validationMessage;
+        showInputErrors(input, inputError, config);
     }
 }
 
