@@ -58,6 +58,7 @@ const imageCaption = document.querySelector('.popup__image-caption');
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   escapeCloseHandler(popup);
+  overlayCloseHandler(popup);
 }
 
 function closePopup(popup) {
@@ -72,6 +73,16 @@ function escapeCloseHandler(popup) {
     }
   }
   document.addEventListener('keydown', escapeClose);
+}
+
+function overlayCloseHandler(popup) {
+  function overlayClose (evt) {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+      popup.removeEventListener('click', overlayClose);
+    }
+  }
+  popup.addEventListener('click', overlayClose);
 }
 
 // логика формы редактирования профиля
