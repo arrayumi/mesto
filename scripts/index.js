@@ -59,14 +59,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function openEditProfileForm() {
-  openPopup(popupEditProfile);
-  popupUsernameInput.value = profileName.textContent;
-  popupAboutInput.value = profileAbout.textContent;
-  enableValidation(formValidationConfig);
-  clearErrorFields(editProfileForm);
-}
-
 function clearErrorFields(form) {
   const inputList = Array.from(form.querySelectorAll('.popup__input'));
   inputList.forEach((input) => {
@@ -78,6 +70,14 @@ function clearErrorFields(form) {
   })
 }
 
+function openEditProfileForm() {
+  openPopup(popupEditProfile);
+  popupUsernameInput.value = profileName.textContent;
+  popupAboutInput.value = profileAbout.textContent;
+  enableValidation(formValidationConfig);
+  clearErrorFields(editProfileForm);
+}
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = popupUsernameInput.value;
@@ -85,19 +85,10 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEditProfile);
 }
 
-function saveCard(evt) {
-  evt.preventDefault();
-  createCard(popupCardTitle.value, popupCardImage.value);
-  evt.target.reset();
-  closePopup(popupAddCard);
-}
+// работаем с карточками
 
 function toggleLike(button) {
   button.classList.toggle('cards__like-button_active');
-}
-
-function deleteCard(button) {
-  button.closest('.cards__item').remove();
 }
 
 function getCard(title, image) {
@@ -109,9 +100,7 @@ function getCard(title, image) {
   cardTitle.textContent = title;
 
   const likeButton = cardsItem.querySelector('.cards__like-button');
-  likeButton.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('cards__like-button_active')
-  });
+  likeButton.addEventListener('click', (evt) => toggleLike(evt.target));
 
   const deleteButton = cardsItem.querySelector('.cards__delete-button');
   deleteButton.addEventListener('click', function () {
@@ -130,6 +119,17 @@ function getCard(title, image) {
 
 function createCard(title, image) {
   cardsList.prepend(getCard(title, image));
+}
+
+function saveCard(evt) {
+  evt.preventDefault();
+  createCard(popupCardTitle.value, popupCardImage.value);
+  evt.target.reset();
+  closePopup(popupAddCard);
+}
+
+function deleteCard(button) {
+  button.closest('.cards__item').remove();
 }
 
 function displayInitialCards() {
