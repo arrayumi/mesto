@@ -54,12 +54,24 @@ const imageCaption = document.querySelector('.popup__image-caption');
 
 // открытие-закрытие попапов
 
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  escapeCloseHandler(popup);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+}
+
+function escapeCloseHandler(popup) {
+  function escapeClose (evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+      document.removeEventListener('keydown', escapeClose);
+    }
+  }
+  document.addEventListener('keydown', escapeClose);
 }
 
 // логика формы редактирования профиля
@@ -149,7 +161,7 @@ displayInitialCards();
 editProfileButton.addEventListener('click', openEditProfileForm);
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
-addCardButton.addEventListener('click', function () {openPopup(popupAddCard);});
+addCardButton.addEventListener('click', function () { openPopup(popupAddCard); });
 saveCardForm.addEventListener('submit', saveCard);
 
 closeButtons.forEach(button => {
