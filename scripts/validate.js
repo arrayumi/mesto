@@ -16,14 +16,13 @@ function showInputErrors(input, inputError, config) {
     inputError.textContent = input.validationMessage;
 }
 
-function clearErrorFields(form) {
-    const inputList = Array.from(form.querySelectorAll('.popup__input'));
+function clearErrorFields(form, config) {
+    const inputList = Array.from(form.querySelectorAll(config.inputSelector));
     inputList.forEach((input) => {
         input.validity.valid = true;
         const inputId = input.id;
         const inputError = document.querySelector(`#${inputId}-error`);
-        input.classList.remove('popup__input_type_error');
-        inputError.textContent = "";
+        hideInputErrors(input, inputError, config);
     })
 }
 
@@ -55,11 +54,9 @@ function toggleButton(form, config) {
     const button = form.querySelector(config.buttonSelector);
     if (!form.checkValidity()) {
         button.disabled = true;
-        console.log('d')
     }
     else {
         button.disabled = false;
-        console.log('en')
     }
 }
 

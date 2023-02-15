@@ -1,4 +1,4 @@
-const formValidationConfig = {
+const formConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     errorClass: 'popup__input_type_error',

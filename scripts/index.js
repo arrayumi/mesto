@@ -15,7 +15,6 @@ function overlayClose(evt) {
 }
 
 function openPopup(popup) {
-  enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
   popup.addEventListener('click', overlayClose)
   document.addEventListener('keydown', escapeClose);
@@ -25,9 +24,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   popup.removeEventListener('click', overlayClose)
   document.removeEventListener('keydown', escapeClose);
-  const form = popup.querySelector('.popup__form');
-  form.reset();
-  clearErrorFields(form);
 }
 
 // логика формы редактирования профиля
@@ -36,11 +32,13 @@ function openEditProfileForm() {
   openPopup(popupEditProfile);
   popupUsernameInput.value = profileName.textContent;
   popupAboutInput.value = profileAbout.textContent;
+  toggleButton(editProfileForm, formConfig);
 }
 
 function handleProfileFormSubmit() {
   profileName.textContent = popupUsernameInput.value;
   profileAbout.textContent = popupAboutInput.value;
+  resetForm(popupEditProfile, formConfig);
   closePopup(popupEditProfile);
 }
 
@@ -79,12 +77,6 @@ function createCard(title, image) {
   cardsList.prepend(getCard(title, image));
 }
 
-function saveCard(evt) {
-  createCard(popupCardTitle.value, popupCardImage.value);
-  evt.target.reset();
-  closePopup(popupAddCard);
-}
-
 function deleteCard(button) {
   button.closest('.cards__item').remove();
 }
@@ -94,18 +86,47 @@ function displayInitialCards() {
     createCard(element.title, element.link);
   });
 }
+
 // закончили работать с карточками
+
+
+function resetForm(popup, config) {
+  const form = popup.querySelector(config.formSelector);
+  form.reset();
+  clearErrorFields(form, config);
+}
+
+function handleSaveCardFormSubmit() {
+  createCard(popupCardTitle.value, popupCardImage.value);
+  resetForm(popupAddCard, formConfig);
+  closePopup(popupAddCard);
+  toggleButton(saveCardForm, formConfig);
+}
+
+function openAddCardForm() {
+  openPopup(popupAddCard);
+}
+
+function closeButtonsHandlers() {
+  closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const popup = button.closest('.popup');
+      closePopup(popup);
+      if (button.previousElementSibling.classList.contains('popup__form')) {
+        resetForm(popup, formConfig);
+      }
+    });
+  });
+}
 
 // отображаем массив стартовых карточек и обвешиваем кнопки обработчиками
 
 displayInitialCards();
+enableValidation(formConfig);
+closeButtonsHandlers();
 
+addCardButton.addEventListener('click', openAddCardForm);
 editProfileButton.addEventListener('click', openEditProfileForm);
+
+saveCardForm.addEventListener('submit', handleSaveCardFormSubmit);
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
-
-addCardButton.addEventListener('click', function () { openPopup(popupAddCard); });
-saveCardForm.addEventListener('submit', saveCard);
-
-closeButtons.forEach(button => {
-  button.addEventListener('click', () => { closePopup(button.closest('.popup')) });
-});
