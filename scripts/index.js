@@ -1,48 +1,32 @@
 // открытие-закрытие попапов
 
+function escapeClose(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
+}
+
+function overlayClose(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.target === evt.currentTarget) {
+    closePopup(popup);
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  escapeCloseHandler(popup);
-  overlayCloseHandler(popup);
+  popup.addEventListener('click', overlayClose)
+  document.addEventListener('keydown', escapeClose);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-}
-
-function escapeCloseHandler(popup) {
-  function escapeClose (evt) {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-      document.removeEventListener('keydown', escapeClose);
-    }
-  }
-  document.addEventListener('keydown', escapeClose);
-}
-
-function overlayCloseHandler(popup) {
-  function overlayClose (evt) {
-    if (evt.target === evt.currentTarget) {
-      closePopup(popup);
-      popup.removeEventListener('click', overlayClose);
-    }
-  }
-  popup.addEventListener('click', overlayClose);
+  popup.removeEventListener('click', overlayClose)
+  document.removeEventListener('keydown', escapeClose);
 }
 
 // логика формы редактирования профиля
-
-function clearErrorFields(form) {
-  const inputList = Array.from(form.querySelectorAll('.popup__input'));
-  inputList.forEach((input) => {
-    input.validity.valid = true;
-    const inputId = input.id;
-    const inputError = document.querySelector(`#${inputId}-error`);
-    input.classList.remove('popup__input_type_error');
-    inputError.textContent = "";
-  })
-}
 
 function openEditProfileForm() {
   openPopup(popupEditProfile);

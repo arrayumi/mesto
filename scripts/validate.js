@@ -11,9 +11,20 @@ function hideInputErrors(input, inputError, config) {
     inputError.textContent = "";
 }
 
-function showInputErrors (input, inputError, config) {
+function showInputErrors(input, inputError, config) {
     input.classList.add(config.errorClass);
     inputError.textContent = input.validationMessage;
+}
+
+function clearErrorFields(form) {
+    const inputList = Array.from(form.querySelectorAll('.popup__input'));
+    inputList.forEach((input) => {
+        input.validity.valid = true;
+        const inputId = input.id;
+        const inputError = document.querySelector(`#${inputId}-error`);
+        input.classList.remove('popup__input_type_error');
+        inputError.textContent = "";
+    })
 }
 
 
