@@ -55,9 +55,11 @@ function toggleButton(form, config) {
     const button = form.querySelector(config.buttonSelector);
     if (!form.checkValidity()) {
         button.disabled = true;
+        console.log('d')
     }
     else {
         button.disabled = false;
+        console.log('en')
     }
 }
 

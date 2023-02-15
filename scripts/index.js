@@ -15,6 +15,7 @@ function overlayClose(evt) {
 }
 
 function openPopup(popup) {
+  enableValidation(formValidationConfig);
   popup.classList.add('popup_opened');
   popup.addEventListener('click', overlayClose)
   document.addEventListener('keydown', escapeClose);
@@ -24,6 +25,9 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   popup.removeEventListener('click', overlayClose)
   document.removeEventListener('keydown', escapeClose);
+  const form = popup.querySelector('.popup__form');
+  form.reset();
+  clearErrorFields(form);
 }
 
 // логика формы редактирования профиля
@@ -32,8 +36,6 @@ function openEditProfileForm() {
   openPopup(popupEditProfile);
   popupUsernameInput.value = profileName.textContent;
   popupAboutInput.value = profileAbout.textContent;
-  enableValidation(formValidationConfig);
-  clearErrorFields(editProfileForm);
 }
 
 function handleProfileFormSubmit() {
@@ -70,7 +72,6 @@ function getCard(title, image) {
     imageCaption.textContent = title;
     openPopup(popupImage);
   })
-  enableValidation(formValidationConfig);
   return cardsItem;
 }
 
