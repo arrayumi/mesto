@@ -1,16 +1,14 @@
 // открытие-закрытие попапов
 
 function escapeClose(evt) {
-  const popup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    closePopup(popup);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
 function overlayClose(evt) {
-  const popup = document.querySelector('.popup_opened');
   if (evt.target === evt.currentTarget) {
-    closePopup(popup);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
