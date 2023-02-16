@@ -27,10 +27,16 @@ function closePopup(popup) {
 // логика формы редактирования профиля
 
 function openEditProfileForm() {
+  resetForm(popupEditProfile, formConfig);
   openPopup(popupEditProfile);
   popupUsernameInput.value = profileName.textContent;
   popupAboutInput.value = profileAbout.textContent;
   toggleButton(editProfileForm, formConfig);
+}
+
+function openAddCardForm() {
+  resetForm(popupAddCard, formConfig);
+  openPopup(popupAddCard);
 }
 
 function handleProfileFormSubmit() {
@@ -101,18 +107,10 @@ function handleSaveCardFormSubmit() {
   toggleButton(saveCardForm, formConfig);
 }
 
-function openAddCardForm() {
-  openPopup(popupAddCard);
-}
-
 function closeButtonsHandlers() {
   closeButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const popup = button.closest('.popup');
-      closePopup(popup);
-      if (button.previousElementSibling.classList.contains('popup__form')) {
-        resetForm(popup, formConfig);
-      }
+      closePopup(button.closest('.popup'));
     });
   });
 }
