@@ -41,21 +41,27 @@ function escapeClose(evt) {
 
 function overlayClose(evt) {
   if (evt.target === evt.currentTarget) {
-    closePopup(document.querySelector('.popup_opened'));
+    closePopup(evt.currentTarget);
   }
 }
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.addEventListener('click', overlayClose)
   document.addEventListener('keydown', escapeClose);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('click', overlayClose)
   document.removeEventListener('keydown', escapeClose);
 }
+
+// вкл валидацию
+
+const editProfileFormValidator = new FormValidator(formConfig, editProfileForm);
+editProfileFormValidator.enableValidation();
+
+const saveCardFormValidator = new FormValidator(formConfig, saveCardForm);
+saveCardFormValidator.enableValidation();
 
 // логика формы редактирования профиля
 
@@ -64,7 +70,7 @@ function openEditProfileForm() {
   openPopup(popupEditProfile);
   popupUsernameInput.value = profileName.textContent;
   popupAboutInput.value = profileAbout.textContent;
-  toggleButton(editProfileForm, formConfig);
+  editProfileFormValidator.toggleButton();
 }
 
 function openAddCardForm() {
@@ -82,7 +88,8 @@ function handleProfileFormSubmit() {
 function resetForm(popup, config) {
   const form = popup.querySelector(config.formSelector);
   form.reset();
-  clearErrorFields(form, config);
+  editProfileFormValidator.clearErrorFields();
+  saveCardFormValidator.clearErrorFields();
 }
 
 function handleSaveCardFormSubmit() {
@@ -90,7 +97,7 @@ function handleSaveCardFormSubmit() {
   displayCard(createCard(data, cardsItemTemplate));
   resetForm(popupAddCard, formConfig);
   closePopup(popupAddCard);
-  toggleButton(saveCardForm, formConfig);
+  saveCardFormValidator.toggleButton();
 }
 
 function closeButtonsHandlers() {
@@ -101,20 +108,6 @@ function closeButtonsHandlers() {
   });
 }
 
-function clearErrorFields(form, config) {
-  const inputList = Array.from(form.querySelectorAll(config.inputSelector));
-  inputList.forEach((input) => {
-    // input.validity.valid = true;
-    const inputId = input.id;
-    const inputError = document.querySelector(`#${inputId}-error`);
-    hideInputErrors(input, inputError, config);
-  })
-}
-
-function hideInputErrors(input, inputError, config) {
-  input.classList.remove(config.errorClass);
-  inputError.textContent = "";
-}
 
 function toggleButton(form, config) {
   const button = form.querySelector(config.buttonSelector);
@@ -147,13 +140,12 @@ function displayInitialCards() {
 
 displayInitialCards();
 
-const editProfileFormValidator = new FormValidator(formConfig, editProfileForm);
-editProfileFormValidator.enableValidation();
-
-const saveCardFormValidator = new FormValidator(formConfig, saveCardForm);
-saveCardFormValidator.enableValidation();
-
 closeButtonsHandlers();
+
+const popups = Array.from(document.querySelectorAll('.popup'));
+popups.forEach((popup) => {
+    popup.addEventListener('click', overlayClose);
+}) 
 
 addCardButton.addEventListener('click', openAddCardForm);
 editProfileButton.addEventListener('click', openEditProfileForm);

@@ -5,6 +5,8 @@ class FormValidator {
         this._inputSelector = config.inputSelector;
         this._errorClass = config.errorClass;
         this._buttonSelector = config.buttonSelector;
+        this._submitButton = this._form.querySelector(this._buttonSelector);
+        this._inputList = Array.from(form.querySelectorAll(config.inputSelector));
     }
 
     // отключаем поведение по умолчанию
@@ -26,6 +28,15 @@ class FormValidator {
     }
 
 
+    clearErrorFields() {
+        this._inputList.forEach((input) => {
+            // input.validity.valid = true;
+            const inputId = input.id;
+            const inputError = document.querySelector(`#${inputId}-error`);
+            this._hideInputErrors(input, inputError);
+        })
+    }
+
     _handleFormInput(evt) {
         const input = evt.target;
         const inputId = input.id;
@@ -39,8 +50,7 @@ class FormValidator {
     }
 
     _addInputListeners() {
-        const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-        inputList.forEach((input) => {
+        this._inputList.forEach((input) => {
             input.addEventListener('input', (evt) => {
                 this._handleFormInput(evt);
             })
@@ -49,23 +59,22 @@ class FormValidator {
 
     // отображаем кнопку в зависимости от валидности формы
 
-    _toggleButton() {
-        const button = this._form.querySelector(this._buttonSelector);
+    toggleButton() {
         if (!this._form.checkValidity()) {
-            button.disabled = true;
+            this._submitButton.disabled = true;
         }
         else {
-            button.disabled = false;
+            this._submitButton.disabled = false;
         }
     }
 
     // включение валидации формы
 
     enableValidation() {
-        this._toggleButton();
+        this.toggleButton();
         this._form.addEventListener('submit', (evt) => this._disableSubmit(evt));
         this._form.addEventListener('input', () => {
-            this._toggleButton();
+            this.toggleButton();
         })
         this._addInputListeners();
     }
