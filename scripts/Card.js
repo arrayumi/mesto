@@ -1,50 +1,46 @@
 import openPopup from './index.js';
+import { imageOpened, imageCaption, popupImage } from './constants.js'
 
 class Card {
     constructor(data, template) {
         this._title = data.title;
         this._image = data.link;
         this._template = template;
+        this._cardsItem = this._template.querySelector('.cards__item').cloneNode(true);
+        this._cardImage = this._cardsItem.querySelector('.cards__image');
     }
 
-    _toggleLike(button) {
-        button.classList.toggle('cards__like-button_active');
+    _toggleLike() {
+        this._likeButton.classList.toggle('cards__like-button_active');
     }
 
-    _deleteCard(button) {
-        button.closest('.cards__item').remove();
+    _deleteCard() {
+        this._cardsItem.remove();
+    }
+
+    _openCardImage() {
+        imageOpened.src = this._image;
+        imageOpened.alt = this._title;
+        imageCaption.textContent = this._title;
+        openPopup(popupImage);
     }
 
     _setEventListeners = () => {
+        this._likeButton = this._cardsItem.querySelector('.cards__like-button');
+        this._likeButton.addEventListener('click', () => this._toggleLike());
 
-        const likeButton = this._cardsItem.querySelector('.cards__like-button');
-        likeButton.addEventListener('click', (evt) => this._toggleLike(evt.target));
+        this._deleteButton = this._cardsItem.querySelector('.cards__delete-button');
+        this._deleteButton.addEventListener('click', () => this._deleteCard());
 
-        const deleteButton = this._cardsItem.querySelector('.cards__delete-button');
-        deleteButton.addEventListener('click', (evt) => {
-            this._deleteCard(evt.target);
-        })
-
-        const cardImage = this._cardsItem.querySelector('.cards__image');
-        cardImage.addEventListener('click', () => {
-            const imageOpened = document.querySelector('.popup__image');
-            const imageCaption = document.querySelector('.popup__image-caption');
-            imageOpened.src = this._image;
-            imageOpened.alt = this._title;
-            imageCaption.textContent = this._title;
-            const popupImage = document.querySelector('.popup_type_image');
-            openPopup(popupImage);
-        })
+        this._cardImage.addEventListener('click', () => this._openCardImage());
     }
 
     render() {
-        this._cardsItem = this._template.querySelector('.cards__item').cloneNode(true);
         this._setEventListeners();
-        const cardImage = this._cardsItem.querySelector('.cards__image');
-        cardImage.src = this._image;
-        cardImage.alt = this._title;
-        const cardTitle = this._cardsItem.querySelector('.cards__title');
-        cardTitle.textContent = this._title;
+        this._cardImage.src = this._image;
+        this._cardImage.alt = this._title;
+        this._cardTitle = this._cardsItem.querySelector('.cards__title');
+        this._cardTitle.textContent = this._title;
         return this._cardsItem;
     }
 }

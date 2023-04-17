@@ -25,4 +25,8 @@ const initialCards = [
     }
   ];
 
-  export {initialCards};
+  const imageOpened = document.querySelector('.popup__image');
+  const imageCaption = document.querySelector('.popup__image-caption');
+  const popupImage = document.querySelector('.popup_type_image');
+
+  export {initialCards, imageOpened, imageCaption, popupImage};
