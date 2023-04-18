@@ -83,13 +83,12 @@ function handleProfileFormSubmit() {
   profileAbout.textContent = popupAboutInput.value;
   resetForm(popupEditProfile, formConfig);
   closePopup(popupEditProfile);
+  editProfileFormValidator.clearErrorFields();
 }
 
 function resetForm(popup, config) {
   const form = popup.querySelector(config.formSelector);
   form.reset();
-  editProfileFormValidator.clearErrorFields();
-  saveCardFormValidator.clearErrorFields();
 }
 
 function handleSaveCardFormSubmit() {
@@ -98,6 +97,7 @@ function handleSaveCardFormSubmit() {
   resetForm(popupAddCard, formConfig);
   closePopup(popupAddCard);
   saveCardFormValidator.toggleButton();
+  saveCardFormValidator.clearErrorFields();
 }
 
 function closeButtonsHandlers() {
@@ -106,17 +106,6 @@ function closeButtonsHandlers() {
       closePopup(button.closest('.popup'));
     });
   });
-}
-
-
-function toggleButton(form, config) {
-  const button = form.querySelector(config.buttonSelector);
-  if (!form.checkValidity()) {
-    button.disabled = true;
-  }
-  else {
-    button.disabled = false;
-  }
 }
 
 // отображаем массив стартовых карточек и обвешиваем кнопки обработчиками
