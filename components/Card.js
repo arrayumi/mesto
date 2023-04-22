@@ -1,8 +1,6 @@
-import openPopup from '../scripts/index.js';
-import { imageOpened, imageCaption, popupImage } from '../scripts/constants.js'
-
 export default class Card {
-    constructor(data, template) {
+    constructor(data, template, handleCardClick) {
+        this._handleCardClick = handleCardClick;
         this._title = data.title;
         this._image = data.link;
         this._template = template;
@@ -19,13 +17,6 @@ export default class Card {
         this._cardsItem.remove();
     }
 
-    _openCardImage() {
-        imageOpened.src = this._image;
-        imageOpened.alt = this._title;
-        imageCaption.textContent = this._title;
-        openPopup(popupImage);
-    }
-
     _setEventListeners = () => {
         this._likeButton = this._cardsItem.querySelector('.cards__like-button');
         this._likeButton.addEventListener('click', () => this._toggleLike());
@@ -33,7 +24,7 @@ export default class Card {
         this._deleteButton = this._cardsItem.querySelector('.cards__delete-button');
         this._deleteButton.addEventListener('click', () => this._deleteCard());
 
-        this._cardImage.addEventListener('click', () => this._openCardImage());
+        this._cardImage.addEventListener('click', () => this._handleCardClick(this._image, this._title));
     }
 
     render() {

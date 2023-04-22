@@ -55,13 +55,13 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="edit-profile-form" novalidate>
                 <label class="popup__field">
-                    <input id="input-username" class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name-input"
+                    <input id="input-username" class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="name"
                         required minlength="2" maxlength="40">
                     <span id="input-username-error" class="popup__input-error"></span>
                 </label>
                 <label class="popup__field">
                     <input id="input-about" class="popup__input popup__input_type_about" type="text" placeholder="О себе"
-                        name="job-input" required minlength="2" maxlength="200">
+                        name="info" required minlength="2" maxlength="200">
                     <span id="input-about-error" class="popup__input-error"></span>
                 </label>
                 <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
@@ -76,12 +76,12 @@
             <form class="popup__form" name="save-card-form" novalidate>
                 <label class="popup__field">
                     <input id="input-name" class="popup__input popup__input_type_name" type="text" placeholder="Название"
-                        name="card-name-input" required minlength="2" maxlength="30">
+                        name="title" required minlength="2" maxlength="30">
                     <span id="input-name-error" class="popup__input-error"></span>
                 </label>
                 <label class="popup__field">
                     <input id="input-url" class="popup__input popup__input_type_url" type="url" placeholder="Ссылка на картинку"
-                        name="card-url-input" required>
+                        name="link" required>
                     <span id="input-url-error" class="popup__input-error"></span>
                 </label>
                 <button class="popup__button popup__button_type_save" type="submit">Создать</button>
@@ -97,7 +97,7 @@
             <button class="popup__button popup__button_type_close" type="button"></button>
         </div>
     </div>
-    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>
