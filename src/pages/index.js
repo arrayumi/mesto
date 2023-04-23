@@ -86,14 +86,16 @@ const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', (data) =>
 
 editProfilePopup.setEventListeners();
 
-function openEditProfileForm({ name, info }) {
+function openEditProfileForm() {
+  editProfileFormValidator.clearErrorFields();
   editProfilePopup.open();
-  popupUsernameInput.value = name;
-  popupAboutInput.value = info;
+  const userdata = userInfo.getUserInfo();
+  popupUsernameInput.value = userdata.name;
+  popupAboutInput.value = userdata.info;
   editProfileFormValidator.toggleButton();
 }
 
-editProfileButton.addEventListener('click', () => { openEditProfileForm(userInfo.getUserInfo()) });
+editProfileButton.addEventListener('click', openEditProfileForm);
 
 // попап добавления карточки
 
@@ -106,6 +108,8 @@ const addCardPopup = new PopupWithForm('.popup_type_add-card', (data) => {
 addCardPopup.setEventListeners();
 
 function openAddCardForm() {
+  saveCardFormValidator.toggleButton();
+  saveCardFormValidator.clearErrorFields();
   addCardPopup.open();
 }
 

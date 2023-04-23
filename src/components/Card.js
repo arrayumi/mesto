@@ -15,6 +15,7 @@ export default class Card {
 
     _deleteCard() {
         this._cardsItem.remove();
+        this._cardsItem = null;
     }
 
     _setEventListeners = () => {
