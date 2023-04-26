@@ -28,6 +28,17 @@ const api = new Api({
   }
 });
 
+
+api.getCards().then((res) => {
+  const cards = new Section({
+    items: res, renderer: (card) => {
+      const renderedCard = createCard(card, cardsItemTemplate);
+      cards.addItem(renderedCard);
+    }
+  }, '.cards__list');
+  cards.renderItems();
+})
+
 function handleCardClick(image, title) {
   imagePopup.open(image, title);
 }
@@ -76,6 +87,7 @@ editProfileButton.addEventListener('click', openEditProfileForm);
 const addCardPopup = new PopupWithForm('.popup_type_add-card', (data) => {
   const newCard = createCard(data, cardsItemTemplate);
   cards.addItem(newCard);
+  api.addItem(data);
   addCardPopup.close();
 })
 
@@ -94,14 +106,4 @@ addCardButton.addEventListener('click', openAddCardForm);
 api.getUserInfo().then((res) => {
   userInfo.setUserInfo(res);
   userInfo.setUserAvatar(res);
-})
-
-api.getCards().then((res) => {
-  const cards = new Section({
-    items: res, renderer: (card) => {
-      const renderedCard = createCard(card, cardsItemTemplate);
-      cards.addItem(renderedCard);
-    }
-  }, '.cards__list');
-  cards.renderItems();
 })

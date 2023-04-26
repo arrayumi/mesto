@@ -30,4 +30,12 @@ export default class Api {
             body: JSON.stringify({ name, about }),
         }).then((res) => this._checkRes(res));
     }
+
+    addItem({name, link}) {
+        return fetch(`${this._url}/cards`, {
+            method: "POST",
+            headers: this._headers,
+            body: JSON.stringify({ name, link }),
+        }).then((res) => this._checkRes(res));
+    }
 }

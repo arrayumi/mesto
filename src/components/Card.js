@@ -7,6 +7,8 @@ export default class Card {
         this._cardsItem = this._template.querySelector('.cards__item').cloneNode(true);
         this._cardImage = this._cardsItem.querySelector('.cards__image');
         this._cardTitle = this._cardsItem.querySelector('.cards__title');
+        this._likesCounterElement = this._cardsItem.querySelector('.cards__likes-counter');
+        this._likesCounter = data.likes.length;
     }
 
     _toggleLike() {
@@ -33,6 +35,7 @@ export default class Card {
         this._cardImage.src = this._image;
         this._cardImage.alt = this._title;
         this._cardTitle.textContent = this._title;
+        this._likesCounterElement.textContent = this._likesCounter;
         return this._cardsItem;
     }
 }
