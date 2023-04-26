@@ -6,8 +6,9 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js'
 import {
-  initialCards, formConfig, editProfileButton, addCardButton, editProfileForm, saveCardForm, 
+  initialCards, formConfig, editProfileButton, addCardButton, editProfileForm, saveCardForm,
   popupUsernameInput, popupAboutInput, cardsItemTemplate
 } from '../utils/constants.js';
 
@@ -19,32 +20,13 @@ editProfileFormValidator.enableValidation();
 const saveCardFormValidator = new FormValidator(formConfig, saveCardForm);
 saveCardFormValidator.enableValidation();
 
-
-// function openEditProfileForm() {
-//   resetForm(popupEditProfile, formConfig);
-//   openPopup(popupEditProfile);
-//   popupUsernameInput.value = profileName.textContent;
-//   popupAboutInput.value = profileAbout.textContent;
-//   editProfileFormValidator.toggleButton();
-// }
-
-// function handleProfileFormSubmit() {
-//   profileName.textContent = popupUsernameInput.value;
-//   profileAbout.textContent = popupAboutInput.value;
-//   resetForm(popupEditProfile, formConfig);
-//   closePopup(popupEditProfile);
-//   editProfileFormValidator.clearErrorFields();
-// }
-
-
-// function handleSaveCardFormSubmit() {
-//   const data = { link: popupCardImage.value, title: popupCardTitle.value };
-//   displayCard(createCard(data, cardsItemTemplate));
-//   resetForm(popupAddCard, formConfig);
-//   closePopup(popupAddCard);
-//   saveCardFormValidator.toggleButton();
-//   saveCardFormValidator.clearErrorFields();
-// }
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-64',
+  headers: {
+    'Content-Type': 'application/json',
+    authorization: 'f1afbe96-9e70-49c1-99e4-7a6e5025fa3b'
+  }
+});
 
 function handleCardClick(image, title) {
   imagePopup.open(image, title);
@@ -55,21 +37,12 @@ function createCard(data, template) {
   return card.render();
 }
 
-// создаем изначальный список карточек
-
-const cards = new Section({
-  items: initialCards, renderer: (card) => {
-    const renderedCard = createCard(card, cardsItemTemplate);
-    cards.addItem(renderedCard);
-  }
-}, '.cards__list');
-cards.renderItems();
-
 // создаем экземпляр класса инфо о пользователе
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
-  infoSelector: '.profile__caption'
+  infoSelector: '.profile__caption',
+  avatarSelector: '.profile__avatar'
 })
 
 // попап открытия картинки
@@ -81,6 +54,7 @@ imagePopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', (data) => {
   userInfo.setUserInfo(data);
+  api.setUserInfo(data);
   editProfilePopup.close();
 });
 
@@ -91,7 +65,7 @@ function openEditProfileForm() {
   editProfilePopup.open();
   const userdata = userInfo.getUserInfo();
   popupUsernameInput.value = userdata.name;
-  popupAboutInput.value = userdata.info;
+  popupAboutInput.value = userdata.about;
   editProfileFormValidator.toggleButton();
 }
 
@@ -114,3 +88,20 @@ function openAddCardForm() {
 }
 
 addCardButton.addEventListener('click', openAddCardForm);
+
+
+
+api.getUserInfo().then((res) => {
+  userInfo.setUserInfo(res);
+  userInfo.setUserAvatar(res);
+})
+
+api.getCards().then((res) => {
+  const cards = new Section({
+    items: res, renderer: (card) => {
+      const renderedCard = createCard(card, cardsItemTemplate);
+      cards.addItem(renderedCard);
+    }
+  }, '.cards__list');
+  cards.renderItems();
+})

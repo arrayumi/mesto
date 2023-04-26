@@ -39,6 +39,6 @@ export const editProfileForm = document.forms["edit-profile-form"];
 export const saveCardForm = document.forms["save-card-form"];
 
 export const popupUsernameInput = document.querySelector('input[name="name"]');
-export const popupAboutInput = document.querySelector('input[name="info"]');
+export const popupAboutInput = document.querySelector('input[name="about"]');
 
 export const cardsItemTemplate = document.querySelector('#cards-item').content;
