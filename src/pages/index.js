@@ -67,9 +67,8 @@ function handleCardClick(image, title) {
 }
 
 function createCard(data, template, userId) {
-  const card = new Card(data, template, handleCardClick, handleDeleteConfirmation, userId);
-  console.log(data)
-  return card.render({cardsId: data._id, likes: data.likes, ownerId: data.owner._id, userId});
+  const card = new Card(data, template, handleCardClick, handleDeleteConfirmation, handleCardLike);
+  return card.render({ cardsId: data._id, likes: data.likes, ownerId: data.owner._id, userId });
 }
 
 // попап открытия картинки
@@ -110,9 +109,10 @@ editProfileButton.addEventListener('click', openEditProfileForm);
 const addCardPopup = new PopupWithForm('.popup_type_add-card', (data) => {
   addCardPopup.loading(true);
   api.addItem(data)
-    .then((data) => { 
+    .then((data) => {
       cards.addItem(createCard(data, cardsItemTemplate, userId));
-      addCardPopup.close() })
+      addCardPopup.close()
+    })
     .catch((err) => {
       console.log(err);
     })
@@ -135,13 +135,13 @@ addCardButton.addEventListener('click', openAddCardForm);
 
 const confirmationPopup = new PopupWithConfirmation('.popup_type_confirmation', (cardToDelete, deleteHandler) => {
   api.deleteItem(cardToDelete._id)
-  .then(()=> {
-    deleteHandler(cardToDelete);
-    confirmationPopup.close();
-  })
-  .catch((err)=> {
-    console.log(err);
-  })
+    .then(() => {
+      deleteHandler(cardToDelete);
+      confirmationPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 });
 
 confirmationPopup.setEventListeners();
@@ -171,3 +171,27 @@ function openUpdateAvatarForm() {
 }
 
 updateAvatarButton.addEventListener('click', openUpdateAvatarForm);
+
+
+function handleCardLike(card, likeHandler) {
+  const likeButton = card.querySelector('.cards__like-button');
+
+  if (likeButton.classList.contains('cards__like-button_active')) {
+    api.removeLike(card._id)
+      .then((res) => {
+        likeHandler(res.likes.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  else {
+    api.addLike(card._id)
+      .then((res) => {
+        likeHandler(res.likes.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+}
