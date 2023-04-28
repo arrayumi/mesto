@@ -21,14 +21,13 @@ export default class PopupWithForm extends Popup {
         this._form.reset();
     }
 
-    loading(isLoading) {
+    loading(isLoading, submitText) {
         this._submitButton = this._popup.querySelector('.popup__button_type_save');
-        this._buttonText = this._submitButton.textContent;
         if (isLoading) {
             this._submitButton.textContent = "Сохранение...";
         }
         else {
-            this._submitButton.textContent = this._buttonText;
+            this._submitButton.textContent = submitText;
         }
     }
 
