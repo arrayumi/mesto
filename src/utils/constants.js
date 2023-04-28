@@ -37,8 +37,11 @@ export const addCardButton = document.querySelector('.profile__button_type_add')
 
 export const editProfileForm = document.forms["edit-profile-form"];
 export const saveCardForm = document.forms["save-card-form"];
+export const editAvatarForm = document.forms["edit-avatar-form"];
 
 export const popupUsernameInput = document.querySelector('input[name="name"]');
 export const popupAboutInput = document.querySelector('input[name="about"]');
 
 export const cardsItemTemplate = document.querySelector('#cards-item').content;
+
+export const updateAvatarButton = document.querySelector('.profile__avatar');

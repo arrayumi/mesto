@@ -15,7 +15,9 @@
     </header>
     <main class="page__element content">
         <section class="profile" aria-label="Профиль">
-            <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар.">
+            <div class="profile__avatar">
+                <img class="profile__avatar-image" src="#" alt="Аватар.">
+            </div>
             <div class="profile__info">
                 <div class="profile__name-container">
                     <h1 class="profile__name"></h1>
@@ -79,7 +81,7 @@
             <form class="popup__form" name="save-card-form" novalidate>
                 <label class="popup__field">
                     <input id="input-name" class="popup__input popup__input_type_name" type="text"
-                        placeholder="Название" name="title" required minlength="2" maxlength="30">
+                        placeholder="Название" name="name" required minlength="2" maxlength="30">
                     <span id="input-name-error" class="popup__input-error"></span>
                 </label>
                 <label class="popup__field">
@@ -97,6 +99,31 @@
         <div class="popup__image-container">
             <img class="popup__image" src="#" alt="#">
             <p class="popup__image-caption"></p>
+            <button class="popup__button popup__button_type_close" type="button"></button>
+        </div>
+    </div>
+
+    <div class="popup popup_type_confirmation">
+        <div class="popup__container popup__container_type_confirmation">
+            <h2 class="popup__title popup__title_type_confirmation">Вы уверены?</h2>
+            <form class="popup__form" name="confirmation-form" novalidate>
+                <button class="popup__button popup__button_type_save" type="submit">Да</button>
+            </form>
+            <button class="popup__button popup__button_type_close" type="button"></button>
+        </div>
+    </div>
+
+    <div class="popup popup_type_update-avatar">
+        <div class="popup__container popup__container_type_update-avatar">
+            <h2 class="popup__title popup__title_type_update-avatar">Обновить аватар</h2>
+            <form class="popup__form" name="edit-avatar-form" novalidate>
+                <label class="popup__field">
+                    <input id="input-url" class="popup__input popup__input_type_url" type="url"
+                        placeholder="Ссылка на картинку" name="avatar" required>
+                    <span id="input-url-error" class="popup__input-error"></span>
+                </label>
+                <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
+            </form>
             <button class="popup__button popup__button_type_close" type="button"></button>
         </div>
     </div>
